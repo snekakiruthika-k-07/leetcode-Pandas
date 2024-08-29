@@ -1,0 +1,162 @@
+1)Create a DataFrame from List
+
+import pandas as pd
+
+def createDataframe(student_data):
+    # Create the DataFrame from the 2D list
+    df = pd.DataFrame(student_data, columns=['student_id', 'age'])
+    return df
+
+# Example usage
+if __name__ == "__main__":
+    # Example 2D list
+    student_data = [
+        [1, 15],
+        [2, 11],
+        [3, 11],
+        [4, 20]
+    ]
+    
+    # Create the DataFrame
+    result_df = createDataframe(student_data)
+    
+    # Print the result
+    print(result_df)
+
+2)GET THE SIZE OF THE DATAFRAME
+
+import pandas as pd
+from typing import List
+
+def getDataframeSize(players: pd.DataFrame) -> List[int]:
+    # Get the number of rows and columns
+    num_rows, num_columns = players.shape
+    # Return the result as a list
+    return [num_rows, num_columns]
+
+# Example usage
+if __name__ == "__main__":
+    # Define the DataFrame
+    players = pd.DataFrame({
+        'player_id': [846, 749, 155, 583, 388, 883, 355, 247, 761, 642],
+        'name': ['Mason', 'Riley', 'Bob', 'Isabella', 'Zachary', 'Ava', 'Violet', 'Thomas', 'Jack', 'Charlie'],
+        'age': [21, 30, 28, 32, 24, 23, 18, 27, 33, 36],
+        'position': ['Forward', 'Winger', 'Striker', 'Goalkeeper', 'Midfielder', 'Defender', 'Striker', 'Striker', 'Midfielder', 'Center-back'],
+        'team': ['RealMadrid', 'Barcelona', 'ManchesterUnited', 'Liverpool', 'BayernMunich', 'Chelsea', 'Juventus', 'ParisSaint-Germain', 'ManchesterCity', 'Arsenal']
+    })
+
+    # Get the size of the DataFrame
+    size = getDataframeSize(players)
+
+    # Print the result
+    print(size)
+
+3)DISPLAY THE FIRST THREE ROWS
+
+import pandas as pd
+
+def selectFirstRows(employees: pd.DataFrame) -> pd.DataFrame:
+    return employees.head(3)
+
+4)SELECT DATA
+
+import pandas as pd
+
+def selectData(students: pd.DataFrame) -> pd.DataFrame:
+    filtered_students = students[students['student_id'] == 101]
+    # Select only the 'name' and 'age' columns
+    result = filtered_students[['name', 'age']]
+    return result
+
+5)CREATE NEW COLUMN
+
+import pandas as pd
+
+def createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    employees['bonus'] = employees['salary'] * 2
+    return employees
+
+6)DROP DUPLICATES ROWS
+
+import pandas as pd
+
+def dropDuplicateEmails(customers: pd.DataFrame) -> pd.DataFrame:
+    column = customers.drop_duplicates('email')
+    return column
+
+7)DROP MISSING DATA
+
+import pandas as pd
+
+def dropMissingData(students: pd.DataFrame) -> pd.DataFrame:
+    cleaned_students = students.dropna(subset=['name'])
+    return cleaned_students
+
+8)MODIFY THE COLUMNS
+
+import pandas as pd
+
+def modifySalaryColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    employees['salary'] =employees['salary'] *2
+    return employees
+
+9)RENAME COLUMNS
+
+import pandas as pd
+
+def renameColumns(students: pd.DataFrame) -> pd.DataFrame:
+    students = students.rename(columns= {
+        'id' : 'student_id',
+        'first' : 'first_name',
+        'last' :'last_name',
+        'age' : 'age_in_years'
+    })
+    return students
+
+10)CHANGE THE DATATYPE
+
+import pandas as pd
+
+def changeDatatype(students: pd.DataFrame) -> pd.DataFrame:
+    students['grade'] = students['grade'].astype(int)
+    return students
+
+11)FILLING MISSING DATA VALUES
+
+import pandas as pd
+
+def fillMissingValues(products: pd.DataFrame) -> pd.DataFrame:
+    products['quantity'] = products['quantity'].fillna(0)
+    return products
+
+12)RESHAPE DATA :CONCATENATE
+
+import pandas as pd
+
+def concatenateTables(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
+    result_df = pd.concat([df1, df2], ignore_index=True)
+    return result_df
+
+13)RESHAPE DATA :MELT
+
+import pandas as pd
+
+def meltTable(report: pd.DataFrame) -> pd.DataFrame:
+    reshaped_df = pd.melt(report, id_vars=['product'], 
+                          var_name='quarter', value_name='sales')
+    return reshaped_df
+
+
+
+14)METHOD CHAINING 
+
+import pandas as pd
+
+def findHeavyAnimals(animals: pd.DataFrame) -> pd.DataFrame:
+    result_df = (
+        animals[animals['weight'] > 100]  # Filter animals with weight > 100
+        .sort_values(by='weight', ascending=False)  # Sort by weight in descending order
+        .reset_index(drop=True)  # Reset index after sorting
+        .loc[:, ['name']]  # Select only the 'name' column
+    )
+    return result_df
